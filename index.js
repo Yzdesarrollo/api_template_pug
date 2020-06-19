@@ -10,7 +10,9 @@ app.set('view engine', 'pug');
 
 app.get('/', (req, res)=>{
     //res.send('Hello world');
-    res.render('index');
+    res.render('index', {
+        title:'Hola'
+    });
 });
 
 app.listen(4000, ()=>{
