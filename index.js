@@ -8,10 +8,17 @@ const app = express();
 app.set('vista', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
+// Home Route
 app.get('/', (req, res)=>{
     //res.send('Hello world');
     res.render('index', {
-        title:'Hola'
+        title:'Bienvenido'
+    });
+});
+
+app.get('/products', (req, res)=>{
+    res.render('add', {
+        title:'Add Products'
     });
 });
 
