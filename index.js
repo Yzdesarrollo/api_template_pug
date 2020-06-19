@@ -17,8 +17,26 @@ app.get('/', (req, res)=>{
 });
 
 app.get('/products', (req, res)=>{
+    let products = [
+        {
+            id:1,
+            title:'Producto 1',
+            description: 'producto 1 prueba contenido'
+        },
+        {
+            id:2,
+            title:'Producto 2',
+            description: 'producto 2 prueba contenido'
+        },
+        {
+            id:3,
+            title:'Producto 3',
+            description: 'producto 3 prueba contenido'
+        }
+    ];
     res.render('add', {
-        title:'Add Products'
+        title:'Add Products',
+        products: products
     });
 });
 
