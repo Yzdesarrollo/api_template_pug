@@ -2,4 +2,18 @@ extends layout
 
 block content
     h1 Prueba #{title}
-        
+        form(action="/products/add", method="post")
+         #form-group
+          label Name:
+          input.form-control(name='name', type='text')
+         #form-group
+          label Price:
+          input.form-control(name='price', type='text')
+         #form-group
+          label Category:
+          input.form-control(name='category', type='text')
+         #form-group
+          label Image:
+          input.form-control(name='image', type='text')
+         #form-group
+          input.btn.btn-primary(type='submit' value='Add')

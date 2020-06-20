@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 
 mongoose.connect('mongodb://localhost/productspug');
 let db = mongoose.connection;
@@ -18,6 +19,13 @@ db.on('error', (err)=>{
 // Init App
 const app = express();
 
+// Middlewares
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
+
+// Bring in Models
+let ProductsModel = require('./models/productsModel');
+
 // Load View Engine
 app.set('vista', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -31,26 +39,37 @@ app.get('/', (req, res)=>{
 });
 
 app.get('/products', (req, res)=>{
-    let products = [
+
+    ProductsModel.find({},(err, products)=>{
+        if(err) 
         {
-            id:1,
-            title:'Producto 1',
-            description: 'producto 1 prueba contenido'
-        },
-        {
-            id:2,
-            title:'Producto 2',
-            description: 'producto 2 prueba contenido'
-        },
-        {
-            id:3,
-            title:'Producto 3',
-            description: 'producto 3 prueba contenido'
+            console.log(err)
         }
-    ];
-    res.render('add', {
-        title:'Add Products',
-        products: products
+        else
+        {
+            res.render('add', {
+                title:'Add Products',
+                products: products
+            })
+        }
+       
+    });
+});
+
+app.post('/products/add', (req, res)=>{
+    console.log('POST /api');
+    console.log(req.body);
+    console.log('Enviado');
+
+    let product = new ProductsModel();
+    product.name = req.body.name
+    product.price = req.body.price
+    product.category = req.body.category
+    product.image = req.body.image
+
+    product.save((err, data )=>{
+        if(err) res.status(500).send({ message: `Error al guardar el producto ${err}`})
+        res.redirect('/products');
     });
 });
 
