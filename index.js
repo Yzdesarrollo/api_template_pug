@@ -1,5 +1,19 @@
 const express = require('express');
 const path = require('path');
+const mongoose = require('mongoose');
+
+mongoose.connect('mongodb://localhost/productspug');
+let db = mongoose.connection;
+
+// Check connection
+db.once('open', ()=>{
+    console.log('Connected to MongoDB');
+});
+
+// Check for DB errors
+db.on('error', (err)=>{
+    console.log(err);
+});
 
 // Init App
 const app = express();
