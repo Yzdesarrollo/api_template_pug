@@ -26,6 +26,9 @@ app.use(bodyParser.json());
 // Bring in Models
 let ProductsModel = require('./models/productsModel');
 
+// set Public Folder
+app.use(express.static(path.join(__dirname, 'public')));
+
 // Load View Engine
 app.set('vista', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
