@@ -1,10 +1,31 @@
 doctype html
 html
     head
-        title app pug
+        title products
+        link(rel='stylesheet', href='https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css', integrity='sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX', crossorigin='anonymous')
+        link(rel="stylesheet", href="style.css")
     body
-        block content
-        br
-        hr
-        footer
-        p Copyright &copy; 2020
+        nav.navbar.navbar-expand-lg.navbar-light.bg-light
+            a.navbar-brand(href='/products') Productos
+            button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarNav', aria-controls='navbarNav', aria-expanded='false', aria-label='Toggle navigation')
+                span.navbar-toggler-icon
+            #navbarNav.collapse.navbar-collapse
+                ul.navbar-nav
+                    li.nav-item
+                    a.nav-link(href='/') Add Product
+                    li.nav-item
+                    a.nav-link(href='#') Pricing
+                    li.nav-item
+                    a.nav-link.disabled(href='#') Disabled
+
+        .container
+            block content
+            br
+            hr
+            footer
+             p Copyright &copy; 2020 YZM
+            script(src='https://code.jquery.com/jquery-3.2.1.slim.min.js', integrity='sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN', crossorigin='anonymous')
+            script(src='https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js', integrity='sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U', crossorigin='anonymous')
+            script(src='https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js', integrity='sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9', crossorigin='anonymous')
+            
+        

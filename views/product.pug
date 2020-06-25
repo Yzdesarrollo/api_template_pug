@@ -1,0 +1,9 @@
+extends layout
+block content
+    h1=product.name
+    h2=product.price
+    h3=product.category
+    h4=product.image
+    hr
+    a.btn.btn-success(href="/products/edit/"+product._id) Edit
+    a.btn.btn-danger.delete-product(href="#",data-id=product._id) Delete

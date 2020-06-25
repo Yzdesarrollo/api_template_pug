@@ -33,6 +33,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set('vista', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
+
+
 // Home Route
 app.get('/', (req, res)=>{
     //res.send('Hello world');
@@ -51,7 +53,7 @@ app.get('/products', (req, res)=>{
         else
         {
             res.render('add', {
-                title:'Add Products',
+                title:'Productos',
                 products: products
             })
         }
@@ -59,19 +61,65 @@ app.get('/products', (req, res)=>{
     });
 });
 
+//Get single product
+app.get('/products/:id', (req, res)=>{
+   ProductsModel.findById(req.params.id, (err, product)=>{
+        res.render('product', {
+        product: product
+        });
+   });
+});
+
+
+//Get single product
+app.get('/products/edit/:id', (req, res)=>{
+    ProductsModel.findById(req.params.id, (err, product)=>{
+            res.render('edit_product', {
+            title: 'Edit Product',
+            product: product
+         });
+    });
+ });
+
 app.post('/products/add', (req, res)=>{
     console.log('POST /api');
     console.log(req.body);
     console.log('Enviado');
 
+    // const {name, price, category, image} = req.body;
+    // let product = {
+    //     name,
+    //     price,
+    //     category,
+    //     image
+    // };
     let product = new ProductsModel();
+
     product.name = req.body.name
     product.price = req.body.price
     product.category = req.body.category
-    product.image = req.body.image
+    product.image = req.body.image 
 
     product.save((err, data )=>{
         if(err) res.status(500).send({ message: `Error al guardar el producto ${err}`})
+        res.redirect('/products');
+    });
+});
+
+// Update
+app.post('/products/edit/:id', (req, res)=>{
+  
+    let product = {};
+
+    product.name = req.body.name
+    product.price = req.body.price
+    product.category = req.body.category
+    product.image = req.body.image 
+
+    let query = {_id:req.params.id}
+
+    ProductsModel.update(query, product, (err)=>{
+        if(err) console.log(err)
         res.redirect('/products');
     });
 });

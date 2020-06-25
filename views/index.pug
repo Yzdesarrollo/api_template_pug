@@ -1,7 +1,7 @@
 extends layout
 
 block content
-    h1 Prueba #{title}
+    h1 Ingrese un producto #{title}
         form(action="/products/add", method="post")
          #form-group
           label Name:
@@ -16,4 +16,4 @@ block content
           label Image:
           input.form-control(name='image', type='text')
          #form-group
-          input.btn.btn-primary(type='submit' value='Add')
+          input.btn.btn-success(type='submit' value='Add')

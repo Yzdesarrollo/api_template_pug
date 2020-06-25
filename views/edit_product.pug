@@ -1,0 +1,21 @@
+extends layout
+
+block content
+    h1 #{title}
+        form(action="/products/edit/"+product._id, method="post")
+         #form-group
+          label Name:
+          input.form-control(name='name', type='text' value=product.name)
+         #form-group
+          label Price:
+          input.form-control(name='price', type='text' value=product.price)
+         #form-group
+          label Category:
+          input.form-control(name='category', type='text' value=product.category)
+         #form-group
+          label Image:
+          input.form-control(name='image', type='text' value=product.name)
+          br
+         #form-group
+          input.btn.btn-success(type='submit' value='Add')
+          

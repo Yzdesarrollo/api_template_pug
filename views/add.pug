@@ -1,8 +1,14 @@
 extends layout
 
 block content
-    h1 Prueba #{title}
-     ul
-      each pro, i in products
-        li= pro.image
+    h1 Lista de #{title}
+     ul.list-group
+      each pro, i in products 
+        br
+        li.list-group-item
+          a(href="/products/" + pro._id)= pro.name
+        li.list-group-item= pro.category
+        li.list-group-item= pro.price
+        li.list-group-item= pro.image
+        
       
